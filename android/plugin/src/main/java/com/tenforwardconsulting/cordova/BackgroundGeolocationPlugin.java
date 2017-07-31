@@ -675,7 +675,9 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin {
             if (r == PackageManager.PERMISSION_DENIED) {
                 log.info("Permission Denied!");
                 actionStartCallbackContext = null;
-                actionStartCallbackContext.error(JSONErrorFactory.getJSONError(PERMISSION_DENIED_ERROR_CODE, "Permission denied by user"));
+                if (actionStartCallbackContext != null) {
+                    actionStartCallbackContext.error(JSONErrorFactory.getJSONError(PERMISSION_DENIED_ERROR_CODE, "Permission denied by user"));
+                }
                 actionStartCallbackContext = null;
                 return;
             }
@@ -684,7 +686,9 @@ public class BackgroundGeolocationPlugin extends CordovaPlugin {
             case START_REQ_CODE:
                 startAndBindBackgroundService();
                 actionStartCallbackContext = null;
-                actionStartCallbackContext.success();
+                if (actionStartCallbackContext != null) {
+                    actionStartCallbackContext.success();
+                }
                 actionStartCallbackContext = null;
                 break;
         }
